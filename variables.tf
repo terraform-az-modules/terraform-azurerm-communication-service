@@ -103,6 +103,7 @@ variable "user_engagement_tracking_enabled" {
 }
 
 variable "domain_management" {
+  description = "Specifies the domain management configuration for the resource."
   type    = string
   default = "AzureManaged"
 }
