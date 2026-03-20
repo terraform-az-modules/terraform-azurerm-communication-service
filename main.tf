@@ -14,9 +14,9 @@ module "labels" {
   extra_tags      = var.extra_tags
 }
 
-##----------------------------------------------------------------------------- 
-## Azure Communication Service resource creation 
-##----------------------------------------------------------------------------- 
+##-----------------------------------------------------------------------------
+## Azure Communication Service resource creation
+##-----------------------------------------------------------------------------
 resource "azurerm_communication_service" "main" {
   count               = var.enable ? 1 : 0
   name                = var.resource_position_prefix ? format("acs-%s", local.name) : format("%s-acs", local.name)
@@ -31,9 +31,9 @@ resource "azurerm_communication_service_email_domain_association" "main" {
   email_service_domain_id  = azurerm_email_communication_service_domain.main[0].id
 }
 
-##----------------------------------------------------------------------------- 
-## Azure Communication Email Service resource creation 
-##----------------------------------------------------------------------------- 
+##-----------------------------------------------------------------------------
+## Azure Communication Email Service resource creation
+##-----------------------------------------------------------------------------
 resource "azurerm_email_communication_service" "main" {
   count               = var.enable ? 1 : 0
   name                = var.resource_position_prefix ? format("aecs-%s", local.name) : format("%s-aecs", local.name)
@@ -42,9 +42,9 @@ resource "azurerm_email_communication_service" "main" {
   tags                = module.labels.tags
 }
 
-##----------------------------------------------------------------------------- 
-## Email domain association for the Azure Communication Service 
-##----------------------------------------------------------------------------- 
+##-----------------------------------------------------------------------------
+## Email domain association for the Azure Communication Service
+##-----------------------------------------------------------------------------
 resource "azurerm_email_communication_service_domain" "main" {
   count                            = var.enable && var.enable_domain ? 1 : 0
   name                             = var.domain_management == "CustomerManaged" ? null : "AzureManagedDomain"
