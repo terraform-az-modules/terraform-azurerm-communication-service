@@ -5,6 +5,7 @@
 | custom\_name | Override default naming convention | `string` | `null` | no |
 | deployment\_mode | Specifies how the infrastructure/resource is deployed | `string` | `"terraform"` | no |
 | domain\_management | n/a | `string` | `"AzureManaged"` | no |
+| domain\_name | Domain Name of Email Communication Service. | `string` | `null` | no |
 | enable | Flag to control the module creation | `bool` | `true` | no |
 | enable\_domain | Flag to create service domain. | `bool` | `true` | no |
 | environment | Environment (e.g. `prod`, `dev`, `staging`). | `string` | `null` | no |
