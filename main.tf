@@ -47,9 +47,15 @@ resource "azurerm_email_communication_service" "main" {
 ##-----------------------------------------------------------------------------
 resource "azurerm_email_communication_service_domain" "main" {
   count                            = var.enable && var.enable_domain ? 1 : 0
-  name                             = var.domain_management == "CustomerManaged" ? null : "AzureManagedDomain"
+  name                             = var.domain_management == "CustomerManaged" ? var.domain_name : "AzureManagedDomain"
   email_service_id                 = azurerm_email_communication_service.main[0].id
   user_engagement_tracking_enabled = var.user_engagement_tracking_enabled
   domain_management                = var.domain_management
   tags                             = module.labels.tags
+  lifecycle {
+    precondition {
+      condition     = var.domain_management != "CustomerManaged" || var.domain_name != null
+      error_message = "The domain_name variable must be set when domain_management is 'CustomerManaged'."
+    }
+  }
 }
