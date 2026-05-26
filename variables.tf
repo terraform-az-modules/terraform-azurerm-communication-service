@@ -106,3 +106,9 @@ variable "domain_management" {
   type    = string
   default = "AzureManaged"
 }
+
+variable "domain_name" {
+  type        = string
+  default     = null
+  description = "Domain Name of Email Communication Service."
+}
