@@ -52,4 +52,10 @@ resource "azurerm_email_communication_service_domain" "main" {
   user_engagement_tracking_enabled = var.user_engagement_tracking_enabled
   domain_management                = var.domain_management
   tags                             = module.labels.tags
+  lifecycle {
+    precondition {
+      condition     = var.domain_management != "CustomerManaged" || var.domain_name != null
+      error_message = "The domain_name variable must be set when domain_management is 'CustomerManaged'."
+    }
+  }
 }
