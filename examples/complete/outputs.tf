@@ -26,3 +26,23 @@ output "secondary_key" {
   value       = module.azcommunication.secondary_key
   sensitive   = true
 }
+
+output "email_service_id" {
+  description = "The ID of the Azure Email Communication Service resource."
+  value       = module.azcommunication.email_service_id
+}
+
+output "email_service_domain_id" {
+  description = "The ID of the Azure Email Communication Service Domain resource."
+  value       = module.azcommunication.email_service_domain_id
+}
+
+output "domain_association_id" {
+  description = "The ID of the Azure Communication Service Email Domain Association."
+  value       = module.azcommunication.domain_association_id
+}
+
+output "verification_records" {
+  description = "The DNS verification records required for CustomerManaged email domains."
+  value       = module.azcommunication.verification_records
+}

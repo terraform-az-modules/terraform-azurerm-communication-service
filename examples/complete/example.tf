@@ -19,9 +19,18 @@ module "resource_group" {
 ## Communication Service Module Call
 ##-----------------------------------------------------------------------------
 module "azcommunication" {
-  source              = "./../../"
-  name                = "core"
-  environment         = "dev"
-  resource_group_name = module.resource_group.resource_group_name
-  location            = "India"
+  source                    = "./../../"
+  name                      = "core"
+  environment               = "dev"
+  resource_group_name       = module.resource_group.resource_group_name
+  location                  = "United States"
+  enable_domain             = true
+  enable_domain_association = true
+  domain_management         = "CustomerManaged"
+  domain_name               = "mail.example.com"
+
+  sender_usernames = {
+    "noreply"       = "No Reply"             # noreply@mail.asterintel.ai
+    "notifications" = "Aster Notifications" # notifications@mail.asterintel.ai
+  }
 }

@@ -117,3 +117,15 @@ variable "domain_name" {
     error_message = "The domain_name must be a valid domain name."
   }
 }
+
+variable "enable_domain_association" {
+  type        = bool
+  default     = false
+  description = "Flag to associate the email domain with the Azure Communication Service. For CustomerManaged domains, set to false until DNS verification (TXT, SPF, DKIM) is complete, then set to true."
+}
+
+variable "sender_usernames" {
+  type        = map(string)
+  default     = {}
+  description = "A map of sender usernames to display names for the email domain. Example: { noreply = \"No Reply\" }. Note: Domain must be verified before sender usernames can be added."
+}
