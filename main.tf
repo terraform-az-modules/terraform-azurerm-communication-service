@@ -26,7 +26,7 @@ resource "azurerm_communication_service" "main" {
 }
 
 resource "azurerm_communication_service_email_domain_association" "main" {
-  count                    = var.enable && var.enable_domain ? 1 : 0
+  count                    = var.enable && var.enable_domain && var.enable_domain_association ? 1 : 0
   communication_service_id = azurerm_communication_service.main[0].id
   email_service_domain_id  = azurerm_email_communication_service_domain.main[0].id
 }
@@ -58,4 +58,14 @@ resource "azurerm_email_communication_service_domain" "main" {
       error_message = "The domain_name variable must be set when domain_management is 'CustomerManaged'."
     }
   }
+}
+
+##-----------------------------------------------------------------------------
+## Email domain sender username creation
+##-----------------------------------------------------------------------------
+resource "azurerm_email_communication_service_domain_sender_username" "main" {
+  for_each                = (var.enable && var.enable_domain && var.enable_domain_association) ? var.sender_usernames : {}
+  name                    = each.key
+  display_name            = each.value != null && each.value != "" ? each.value : each.key
+  email_service_domain_id = azurerm_email_communication_service_domain.main[0].id
 }
